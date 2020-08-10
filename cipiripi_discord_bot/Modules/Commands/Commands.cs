@@ -1,40 +1,18 @@
-﻿using Discord;
-using Discord.Net;
-using Discord.WebSocket;
+﻿using cipiripi_discord_bot.Data;
+using Discord;
 using Discord.Commands;
+using Newtonsoft.Json;
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using cipiripi_discord_bot.Data;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Net.Http;
 
 namespace cipiripi_discord_bot.Modules
 {
     // for commands to be available, and have the Context passed to them, we must inherit ModuleBase
     public class ExampleCommands : ModuleBase
     {
-        [Command("hi")]
-        public async Task HelloCommand()
-        {
-            // initialize empty string builder for reply
-            var sb = new StringBuilder();
-
-            // get user info from the Context
-            var user = Context.User;
-
-            // build out the reply
-            sb.AppendLine($"Hi [{user.Username}] nice to meet u ^^");
-            sb.AppendLine("Stay AWESOME !");
-
-            // send simple string reply
-            await ReplyAsync(sb.ToString());
-        }
-
         [Command("Who are u ?")]
         public async Task WhoAreUCommand()
         {
@@ -48,7 +26,7 @@ namespace cipiripi_discord_bot.Modules
 
             // build out the reply
             embed.WithColor(new Color(0, 255, 0));
-            sb.AppendLine($"Hmmm how can i say this to u [{user.Username}] i am bot who can read and write a lot of ones and zeros ^^. My name is [{client.CurrentUser}] ");
+            sb.AppendLine($"Hmmm how can i say this to u {user.Username} i am bot who can read and write a lot of ones and zeros ^^. My name is {client.CurrentUser} ");
 
             // send simple string reply
             await ReplyAsync(sb.ToString());
@@ -57,7 +35,7 @@ namespace cipiripi_discord_bot.Modules
         [Command("cipiripi")]
         [Alias("ask")]
         [RequireUserPermission(GuildPermission.KickMembers)]
-        public async Task AskCipiripi([Remainder]string args = null)
+        public async Task AskCipiripi([Remainder] string args = null)
         {
             // I like using StringBuilder to build out the reply
             var sb = new StringBuilder();
@@ -65,17 +43,19 @@ namespace cipiripi_discord_bot.Modules
             var embed = new EmbedBuilder();
 
             // now to create a list of possible replies
-            var replies = new List<string>();
+            var replies = new List<string>
+            {
 
-            // add our possible replies
-            replies.Add("CSGO");
-            replies.Add("GTA5");
-            replies.Add("LEAGUE OF LEGENDS");
-            replies.Add("VALORANT");
+                // add our possible replies
+                "CSGO",
+                "GTA5",
+                "LEAGUE OF LEGENDS",
+                "VALORANT"
+            };
 
             // time to add some options to the embed (like color and title)
             embed.WithColor(new Color(0, 255, 0));
-            embed.Title = "Welcome to the amg !";
+            //embed.Title = "Welcome to the amg !";
 
             // we can get lots of information from the Context that is passed into the commands
             // here I'm setting up the preface with the user's name and a comma
@@ -132,9 +112,10 @@ namespace cipiripi_discord_bot.Modules
             await ReplyAsync(null, false, embed.Build());
         }
 
-        [Command("wtp")] // what to play
+        [Command("info")]
+        [Alias("title")]
         [RequireUserPermission(GuildPermission.KickMembers)]
-        public async Task AskForGmameCipiripi()
+        public async Task GameInfo()
         {
             //Select random game from json and output title and genres.
             string json = "https://static.nvidiagrid.net/supported-public-game-list/gfnpc.json?JSON";
@@ -145,30 +126,13 @@ namespace cipiripi_discord_bot.Modules
 
             var str = await result.Content.ReadAsStringAsync();
 
-            var obj = JsonConvert.DeserializeObject<List<GamesData>>(str);
+            List<GamesData> obj = JsonConvert.DeserializeObject<List<GamesData>>(str);
 
-            Random rnd = new Random();
-            GamesData item = obj[rnd.Next(0, obj.Count)];
+            //var title = new GamesData();
 
-            // I like using StringBuilder to build out the reply
-            var sb = new StringBuilder();
-            // let's use an embed for this one!
-            var embed = new EmbedBuilder();
+            string jsonString;
+            //jsonString = JsonSerializer.Serialize();
 
-            // we can get lots of information from the Context that is passed into the commands
-            // here I'm setting up the preface with the user's name and a comma
-            sb.AppendLine($"{Context.User.Username},");
-            sb.AppendLine();
-
-            // build out our reply with the handy StringBuilder
-            embed.WithColor(new Color(0, 255, 0));
-            sb.AppendLine($"...you should play [**{item.ToString()}**]");
-
-            // now we can assign the description of the embed to the contents of the StringBuilder we created
-            embed.Description = sb.ToString();
-
-            // this will reply with the embed
-            await ReplyAsync(null, false, embed.Build());
         }
     }
 }

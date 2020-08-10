@@ -15,9 +15,12 @@ namespace cipiripi_discord_bot.Data
         [DataMember]
         public List<string> Genres { get; set; }
 
+        [DataMember]
+        public string Publisher { get; set; }
+
         public override string ToString()
         {
-            return $"{Title} ({string.Join(",", Genres)})";
+            return $"Title : {Title} \n Genres: {string.Join(",", Genres)} \n Publisher : {Publisher}";
         }
     }
 }

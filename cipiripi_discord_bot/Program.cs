@@ -1,16 +1,11 @@
 ﻿using System;
 using Discord;
-using Discord.Net;
 using Discord.Commands;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using cipiripi_discord_bot.Services;
-using cipiripi_discord_bot.Services;
-using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace cipiripi_discord_bot
 {
