@@ -130,9 +130,12 @@ namespace cipiripi_discord_bot.Modules
 
             //var title = new GamesData();
 
-            string jsonString;
+            //string jsonString;
             //jsonString = JsonSerializer.Serialize();
 
         }
+
+
+
     }
 }

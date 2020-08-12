@@ -7,7 +7,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 
-namespace cipiripi_discord_bot.Services
+namespace cipiripi_discord_bot.Handlers
 {
     public class CommandHandler
     {

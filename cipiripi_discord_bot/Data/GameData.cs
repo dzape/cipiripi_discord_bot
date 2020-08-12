@@ -24,4 +24,3 @@ namespace cipiripi_discord_bot.Data
         }
     }
 }
-
