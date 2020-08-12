@@ -1,10 +1,15 @@
-﻿using DSharpPlus;
+﻿using cipiripi_discord_bot.Commands;
+using cipiripi_discord_bot.Data;
+using cipiripi_discord_bot.Commands;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using cipiripi_discord_bot.Modules.Commands;
+using Org.BouncyCastle.Utilities.IO;
 
 namespace cipiripi_discord_bot
 {
@@ -12,7 +17,7 @@ namespace cipiripi_discord_bot
     {
         public DiscordClient _client { get; private set; }
         public CommandsNextModule _commands { get; private set; }
-
+       
         public async Task RunAsync()
         {
             var json = string.Empty;
@@ -29,7 +34,7 @@ namespace cipiripi_discord_bot
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 LogLevel = LogLevel.Debug,
-                UseInternalLogHandler = true,
+                UseInternalLogHandler = true
             };
 
             _client = new DiscordClient(config);
@@ -40,13 +45,18 @@ namespace cipiripi_discord_bot
             {
                 StringPrefix = configJson.Prefix,
                 EnableDms = false,
-                EnableMentionPrefix = false
+                EnableMentionPrefix = false,
+                EnableDefaultHelp = true
             };
 
             _commands = _client.UseCommandsNext(commandsConfig);
 
-            await _client.ConnectAsync();
+            _commands.RegisterCommands<random_game>();
+            _commands.RegisterCommands<timer_command>();
+            _commands.RegisterCommands<weather_command>();
+            _commands.RegisterCommands<basic_commands>();
 
+            await _client.ConnectAsync();
             await Task.Delay(-1);
         }
 

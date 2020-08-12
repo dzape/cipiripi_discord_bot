@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
+using Discord.WebSocket;
 
 namespace cipiripi_discord_bot.Handlers
 {

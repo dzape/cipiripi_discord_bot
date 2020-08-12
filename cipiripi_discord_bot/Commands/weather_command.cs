@@ -1,17 +1,12 @@
 ﻿using cipiripi_discord_bot.Data;
-using Discord.Commands;
-using MySql.Data.MySqlClient.Memcached;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using cipiripi_discord_bot.Data;
-using Discord;
+using Discord.Commands;
 
-namespace cipiripi_discord_bot.Modules.Commands
+namespace cipiripi_discord_bot.Commands
 {
     public class weather_command : ModuleBase
     {
