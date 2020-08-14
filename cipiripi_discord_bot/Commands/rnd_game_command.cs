@@ -7,6 +7,7 @@ using cipiripi_discord_bot.Data;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using Newtonsoft.Json;
 
 namespace cipiripi_discord_bot.Commands
@@ -30,15 +31,14 @@ namespace cipiripi_discord_bot.Commands
             Random rnd = new Random();
             GamesData item = obj[rnd.Next(0, obj.Count)];
 
-            var sb = new StringBuilder();
+            var msg = ($" \n 🎮 Hey { ctx.User.Username } you should try ```{item.ToString()}```"); 
 
-            sb.AppendLine($" {ctx.User.Username},");
-            sb.AppendLine();
+            var embed = new DiscordEmbedBuilder
+            {
+                Description = msg,
+            };
 
-            sb.AppendLine($"Hey { ctx.User.Username } you should play ```{item.ToString()}```");
-
-            await ctx.RespondAsync(sb.ToString());
-
+            await ctx.RespondAsync(embed: embed);
         }
     }
 }

@@ -10,9 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net.Commands" Version="2.2.0" />
-    <PackageReference Include="Discord.Net.Webhook" Version="2.2.0" />
-    <PackageReference Include="Discord.Net.WebSocket" Version="2.2.0" />
     <PackageReference Include="DSharpPlus" Version="3.2.3" />
     <PackageReference Include="DSharpPlus.CommandsNext" Version="3.2.3" />
     <PackageReference Include="DSharpPlus.Interactivity" Version="3.2.3" />

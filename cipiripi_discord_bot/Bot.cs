@@ -1,6 +1,5 @@
 ﻿using cipiripi_discord_bot.Commands;
 using cipiripi_discord_bot.Data;
-using cipiripi_discord_bot.Commands;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
@@ -8,8 +7,6 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using cipiripi_discord_bot.Modules.Commands;
-using Org.BouncyCastle.Utilities.IO;
 
 namespace cipiripi_discord_bot
 {
@@ -24,7 +21,7 @@ namespace cipiripi_discord_bot
 
             using (var fs = File.OpenRead("config.json"))
             using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
-                json = await sr.ReadToEndAsync().ConfigureAwait(false);
+            json = await sr.ReadToEndAsync().ConfigureAwait(false);
 
             var configJson = JsonConvert.DeserializeObject<ConfigJson>(json);
 
@@ -53,7 +50,7 @@ namespace cipiripi_discord_bot
 
             _commands.RegisterCommands<random_game>();
             _commands.RegisterCommands<timer_command>();
-            _commands.RegisterCommands<weather_command>();
+            _commands.RegisterCommands<WeatherCommand>();
             _commands.RegisterCommands<basic_commands>();
 
             await _client.ConnectAsync();
