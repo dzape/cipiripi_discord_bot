@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace cipiripi_discord_bot.Commands
 {
-    public class basic_commands
+    public class BaisicCommands
     {
         [Command("hi")]
         [Description("Takes your username, mentions u in the chat and 👋 to u .")]
@@ -17,22 +17,22 @@ namespace cipiripi_discord_bot.Commands
             var msg = ($"👋 Hi, {ctx.User.Mention}!");
 
             var embed = new DiscordEmbedBuilder
-            { 
+            {
                 Description = msg,
             };
-           
+
             embed.WithColor(new DiscordColor(0x03ecfc));
-           
+
             await ctx.RespondAsync(embed: embed).ConfigureAwait(false);
         }
 
         [Command("randomnum")]
-        [Description("Random number is given to u 🎲.U set min and max num. ex. !randomnum 1 6")]
+        [Description("Random number is given to u 🎲 .U set min and max num. ex. !randomnum 1 6")]
         public async Task Random(CommandContext ctx, int min, int max)
-        {   
+        {
             var rnd = new Random();
             var msg = ($"🎲 Your random number is: {rnd.Next(min, max)}");
-            
+
             var embed = new DiscordEmbedBuilder
             {
                 Description = msg,
@@ -84,6 +84,16 @@ namespace cipiripi_discord_bot.Commands
 
             // and finally post the results
             await ctx.RespondAsync(string.Join("\n", results));
+        }
+        
+
+        [Command("count")]
+        public async Task CountMembers(CommandContext ctx,string name)
+        {
+            if(UserStatus.Invisible!=0)
+            {
+                await ctx.RespondAsync("Woaah he is invisible");
+            }
         }
     }
 }

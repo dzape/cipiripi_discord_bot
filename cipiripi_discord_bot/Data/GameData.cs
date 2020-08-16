@@ -20,7 +20,9 @@ namespace cipiripi_discord_bot.Data
 
         public override string ToString()
         {
-            return $"Title : {Title} \n Genres: {string.Join(",", Genres)} \n Publisher : {Publisher}";
+            return $" Title : {Title} \n" +
+                   $" Genres: {string.Join(",", Genres)} \n " +
+                   $" Publisher : {Publisher}";
         }
     }
 }

@@ -48,10 +48,10 @@ namespace cipiripi_discord_bot
 
             _commands = _client.UseCommandsNext(commandsConfig);
 
-            _commands.RegisterCommands<random_game>();
-            _commands.RegisterCommands<timer_command>();
+            _commands.RegisterCommands<GameCommand>();
+            _commands.RegisterCommands<TimerCommand>();
             _commands.RegisterCommands<WeatherCommand>();
-            _commands.RegisterCommands<basic_commands>();
+            _commands.RegisterCommands<BaisicCommands>();
 
             await _client.ConnectAsync();
             await Task.Delay(-1);
